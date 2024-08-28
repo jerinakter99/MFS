@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Optional: Link to a CSS file -->
-</head>
+    <title>Home page</title>
+    <meta name ="viewport" content = "width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="{% static 'css/home_style.css' %}"></head>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <body>
-    <h1>Hello World</h1>
-    <div class="button-container">
-        <a href="register"><h2>register</h2></a>
-        <a href="login"><h2>login</h2></a>
+    <nav>
+        <input type="checkbox" id ="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">Wallet</label>
+        <ul>
+            <li><a class="active" href="#">Home</a></li>
+            <li><a href="active">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="{% url 'register' %}">Register</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
 
-    </div>
+        </ul>
+    </nav>
+<section ></section>
 </body>
 </html>
