@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+</head>
+<body>
+    <h1>Edit Profile</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" value="{{ first_name }}" required><br><br>
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" value="{{ last_name }}" required><br><br>
+
+        <label for="username">Username:</label>
+
+        <input type="text" id="username" name="username" value="{{ username }}" required><br><br>
+
+
+<!--        <label for="username">Username:</label>-->
+<!--        <input type="text"  id="username" name="username" value="{{ username }}"  required><br><br>-->
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ email }}" required><br><br>
+
+        <label for="name">Account:</label>
+        <input type="text" readonly id="name" name="name" value="{{ name }}"><br><br>
+
+        <label for="phone">Phone:</label>
+        <input type="text"  id="phone" name="phone" value="{{ phone }}"><br><br>
+
+        <label for="dob">Date-of-Birth:</label>
+       <input type="date" id="dob" name="dob" value="{{ dob|date:'Y-m-d' }}"><br><br>
+
+
+        <label for="gender">Gender:</label>
+        <input type="text" id="gender" name="gender" value="{{ gender }}"><br><br>
+
+
+
+
+        <label for="pic">Profile Picture:</label>
+<!--        <input type="file" id="pic" name="pic"><br><br>-->
+<!--        {% if pic %}-->
+<!--            <img src="{{ pic.url }}" alt="Profile Picture" width="100"><br><br>-->
+<!--        {% endif %}-->
+         <input type="file" id="pic" name="pic"><br><br>
+
+        {% if pic %}
+            <img src="{{ pic.url }}" alt="Profile Picture" width="100"><br><br>
+        {% endif %}
+
+
+
+
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <a href="{% url 'account' %}">Back to Profile</a>
+</body>
+</html>

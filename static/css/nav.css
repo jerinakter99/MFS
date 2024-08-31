@@ -1,183 +1,263 @@
-*{
-    margin: 0;
-    padding: 0;
-    color: #f2f5f7;
-    font-family: sans-serif;
-    letter-spacing: 1px;
-    font-weight: 300;
+/* Global
+/ -------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
 }
-body{
-    overflow-x: hidden;
+/* Dash Navbar Top = dnt
+/ -------------------------------------------------- */
+.dash-navbar-top {
+  margin-bottom: 0;
+  min-height: 61px;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-radius: 0;
+  line-height: 1;
 }
-nav{
-    height: 6rem;
-    width: 100vw;
-    background-color: #131418;
-    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.2);
-    display: flex;
-    position: fixed;
-    z-index: 10;
+.dash-navbar-top .nb-btn-toggle {
+  position: absolute;
+  left: 16px;
+  top: 13.5px;
+  font-size: 21px;
+  background-color: rgba(0, 0, 0, 0);
+  border-width: 0;
+  color: #d3d1dd;
+  outline: 0;
 }
-
-/*Styling logo*/
-.logo{
-    padding:1vh 1vw;
-    text-align: center;
-}
-.logo img {
-    height: 5rem;
-    width: 5rem;
-}
-
-/*Styling Links*/
-.nav-links{
-    display: flex;
-    list-style: none;
-    width: 88vw;
-    padding: 0 0.7vw;
-    justify-content: space-evenly;
-    align-items: center;
-    text-transform: uppercase;
-}
-.nav-links li a{
-    text-decoration: none;
-    margin: 0 0.7vw;
-}
-.nav-links li a:hover {
-    color: #61DAFB;
-}
-.nav-links li {
-    position: relative;
-}
-.nav-links li a::before {
-    content: "";
-    display: block;
-    height: 3px;
-    width: 0%;
-    background-color: #61DAFB;
-    position: absolute;
-    transition: all ease-in-out 250ms;
-    margin: 0 0 0 10%;
-}
-.nav-links li a:hover::before{
-    width: 80%;
-}
-
-/*Styling Buttons*/
-.login-button{
-    background-color: transparent;
-    border: 1.5px solid #f2f5f7;
-    border-radius: 2em;
-    padding: 0.6rem 0.8rem;
-    margin-left: 2vw;
-    font-size: 1rem;
-    cursor: pointer;
-
-}
-.login-button:hover {
-    color: #131418;
-    background-color: #f2f5f7;
-    border:1.5px solid #f2f5f7;
-    transition: all ease-in-out 350ms;
-}
-.join-button{
-    color: #131418;
-    background-color: #61DAFB;
-    border: 1.5px solid #61DAFB;
-    border-radius: 2em;
-    padding: 0.6rem 0.8rem;
-    font-size: 1rem;
-    cursor: pointer;
-}
-.join-button:hover {
-    color: #f2f5f7;
-    background-color: transparent;
-    border:1.5px solid #f2f5f7;
-    transition: all ease-in-out 350ms;
-}
-
-/*Styling Hamburger Icon*/
-.hamburger div{
-    width: 30px;
-    height:3px;
-    background: #f2f5f7;
-    margin: 5px;
-    transition: all 0.3s ease;
-}
-.hamburger{
+@media (min-width: 768px) {
+  .dash-navbar-top.nb-visible .nb-btn-toggle {
     display: none;
+  }
 }
 
-/*Stying for small screens*/
-@media screen and (max-width: 800px){
-    nav{
-        position: fixed;
-        z-index: 3;
-    }
-    .hamburger{
-        display:block;
-        position: absolute;
-        cursor: pointer;
-        right: 5%;
-        top: 50%;
-        transform: translate(-5%, -50%);
-        z-index: 2;
-        transition: all 0.7s ease;
-    }
-    .nav-links{
-        position: fixed;
-        background: #131418;
-        height: 100vh;
-        width: 100%;
-        flex-direction: column;
-        clip-path: circle(50px at 90% -20%);
-        -webkit-clip-path: circle(50px at 90% -10%);
-        transition: all 1s ease-out;
-        pointer-events: none;
-    }
-    .nav-links.open{
-        clip-path: circle(1000px at 90% -10%);
-        -webkit-clip-path: circle(1000px at 90% -10%);
-        pointer-events: all;
-    }
-    .nav-links li{
-        opacity: 0;
-    }
-    .nav-links li:nth-child(1){
-        transition: all 0.5s ease 0.2s;
-    }
-    .nav-links li:nth-child(2){
-        transition: all 0.5s ease 0.4s;
-    }
-    .nav-links li:nth-child(3){
-        transition: all 0.5s ease 0.6s;
-    }
-    .nav-links li:nth-child(4){
-        transition: all 0.5s ease 0.7s;
-    }
-    .nav-links li:nth-child(5){
-        transition: all 0.5s ease 0.8s;
-    }
-    .nav-links li:nth-child(6){
-        transition: all 0.5s ease 0.9s;
-        margin: 0;
-    }
-    .nav-links li:nth-child(7){
-        transition: all 0.5s ease 1s;
-        margin: 0;
-    }
-    li.fade{
-        opacity: 1;
-    }
+.dash-navbar-top .navbar-toggle {
+  border-width: 0;
+  font-size: 24px;
+  color: #d3d1dd;
+  padding: 0 10px;
+  margin-top: 14px;
+  margin-right: 15px;
 }
-/*Animating Hamburger Icon on Click*/
-.toggle .line1{
-    transform: rotate(-45deg) translate(-5px,6px);
+.dash-navbar-top .navbar-toggle:hover,
+.dash-navbar-top .navbar-toggle:focus {
+  background-color: transpardnt;
 }
-.toggle .line2{
-    transition: all 0.7s ease;
-    width:0;
+
+
+/* Dash Navbar Left = nb
+/ -------------------------------------------------- */
+.dash-navbar-left {
+  position: absolute;
+  background-color: #2A2D35;
+  width: 250px;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto;
+  z-index: 999;
+  padding-top: 5px;
+  -webkit-transition: left 300ms;
+  -o-transition: left 300ms;
+  transition: left 300ms;
 }
-.toggle .line3{
-    transform: rotate(45deg) translate(-5px,-6px);
+.navbar-brand{
+  display: block;
+  background: orange;
+  width: 100%;
+  color: #FFF;
+  text-transform: uppercase;
+  padding: 0 20px;
+  margin:-10px 0 30px 0;
+  height: 65px;
+  line-height: 65px;
+}
+.navbar-brand:hover{
+  color: #FFF;
+}
+.navbar .form-inline{
+  margin-top: 12px;
+}
+.navbar .btn{
+  background: orange;
+  color: #FFF;
+}
+@media (max-width: 767px) {
+  .dash-navbar-left.nb-visible {
+    left: -250px;
+  }
+  .dash-navbar-left.nb-visible.nb-show {
+    left: 0;
+  }
+}
+.dash-navbar-left.nb-hidden {
+  left: -250px;
+}
+.dash-navbar-left.nb-hidden.nb-show {
+  left: 0;
+}
+.dash-navbar-left .nb-nav-title {
+  text-transform: uppercase;
+  color: #7f799c;
+  border-bottom: 1px solid rgba(255,152,0,0.1);
+  padding: 10px 25px;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+.dash-navbar-left .nb-nav {
+  padding-left: 0;
+  list-style: none;
+}
+.dash-navbar-left .nb-nav ul {
+  padding-left: 0;
+  list-style: none;
+}
+.dash-navbar-left .nb-nav li {
+  position: relative;
+}
+.dash-navbar-left .nb-nav li a {
+  display: block;
+  outline: 0;
+  padding: 8px 25px 7px;
+  font-size: 13px;
+  color: #b7b4c7;
+}
+.dash-navbar-left .nb-nav li a:hover,
+.dash-navbar-left .nb-nav li a:focus {
+  color: #eeeeee;
+  text-decoration: none;
+  background-color: rgba(255,152,0,0.1);
+  -webkit-box-shadow: inset 3px 0 0 orange;
+  box-shadow: inset 3px 0 0 orange;
+}
+.dash-navbar-left .nb-nav li a:hover .badge,
+.dash-navbar-left .nb-nav li a:focus .badge {
+  color: #EEE;
+}
+.dash-navbar-left .nb-nav li a > .nb-link-icon {
+  padding-right: 8px;
+}
+.dash-navbar-left .nb-nav li a > .nb-btn-sub-collapse {
+  position: absolute;
+  right: 25px;
+  top: 10px;
+}
+.dash-navbar-left .nb-nav li a > .badge {
+  position: absolute;
+  right: 24px;
+  top: 6px;
+  padding: 3px 10px;
+  color: #a7a9ac;
+  background-color: transparent;
+  border: 1px solid #4f4a65;
+}
+.dash-navbar-left .nb-nav li a.collapsed .nb-btn-sub-collapse {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.dash-navbar-left .nb-nav li.active > a {
+  background-color: rgba(255,152,0,0.1);
+  -webkit-box-shadow: inset 3px 0 0 orange;
+  box-shadow: inset 3px 0 0 orange;
+}
+.dash-navbar-left .nb-nav li .nb-sub-one {
+  background-color: #15141b;
+}
+.dash-navbar-left .nb-nav li .nb-sub-one li {
+  border-top: 1px solid #1c1b24;
+}
+.dash-navbar-left .nb-nav li .nb-sub-one li a {
+  display: block;
+  color: #a7a9ac;
+}
+.dash-navbar-left .nb-nav li .nb-sub-one li a:hover,
+.dash-navbar-left .nb-nav li .nb-sub-one li a:focus {
+  color: #eeeeee;
+  background-color: #1c1b24;
+  -webkit-box-shadow: inset 3px 0 0 #1c1b24;
+  box-shadow: inset 3px 0 0 #1c1b24;
+}
+.dash-navbar-left .nb-nav li .nb-sub-one li a > .nb-link-icon {
+  padding-right: 8px;
+}
+.dash-navbar-left .nb-nav li .nb-sub-one li a > .badge {
+  color: #a7a9ac;
+  background-color: transparent;
+  border: 1px solid #211f2a;
+}
+.dash-navbar-left .nb-nav li .nb-sub-one li.active > a {
+  background-color: #1c1b24;
+  -webkit-box-shadow: inset 3px 0 0 #1c1b24;
+  box-shadow: inset 3px 0 0 #1c1b24;
+}
+.dash-navbar-left .nb-nav li .nb-sub-two {
+  background-color: #211f2a;
+}
+.dash-navbar-left .nb-nav li .nb-sub-two li {
+  border-top-color: 1px solid #282533;
+}
+.dash-navbar-left .nb-nav li .nb-sub-two li a {
+  color: #a7a9ac;
+}
+.dash-navbar-left .nb-nav li .nb-sub-two li a:hover,
+.dash-navbar-left .nb-nav li .nb-sub-two li a:focus {
+  color: #eeeeee;
+  background-color: #282533;
+  -webkit-box-shadow: inset 3px 0 0 #282533;
+  box-shadow: inset 3px 0 0 #282533;
+}
+.dash-navbar-left .nb-nav li .nb-sub-two li a > .badge {
+  color: #a7a9ac;
+  background-color: transparent;
+  border: 1px solid #211f2a;
+}
+.dash-navbar-left .nb-nav li .nb-sub-two li.active > a {
+  background-color: #1c1b24;
+  -webkit-box-shadow: inset 3px 0 0 #1c1b24;
+  box-shadow: inset 3px 0 0 #1c1b24;
+}
+/* Content wrap
+/ -------------------------------------------------- */
+.content-wrap {
+  position: relative;
+}
+.content-wrap.nb-visible {
+  margin-left: 250px;
+}
+@media (max-width: 767px) {
+  .content-wrap.nb-visible {
+    margin-left: 0;
+    -webkit-transition: all 300ms;
+    -o-transition: all 300ms;
+    transition: all 300ms;
+  }
+  .content-wrap.nb-visible.nb-push {
+    -webkit-transform: translate(250px, 0);
+    -ms-transform: translate(250px, 0);
+    -o-transform: translate(250px, 0);
+    transform: translate(250px, 0);
+  }
+}
+.content-wrap.nb-hidden {
+  margin-left: 0;
+  -webkit-transition: all 300ms;
+  -o-transition: all 300ms;
+  transition: all 300ms;
+}
+.content-wrap.nb-hidden.nb-push {
+  margin-left: 250px;
+}
+@media (max-width: 767px) {
+  .content-wrap.nb-hidden.nb-push {
+    margin-left: 0;
+    -webkit-transform: translate(250px, 0);
+    -ms-transform: translate(250px, 0);
+    -o-transform: translate(250px, 0);
+    transform: translate(250px, 0);
+  }
+}
+.content-wrap.content-opacity.nb-overlay,
+.content-wrap.content-opacity.nb-push {
+  opacity: 0.3;
+  filter: alpha(opacity=30);
 }

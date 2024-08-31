@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Card</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .profile-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .profile-card img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .profile-card h2 {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .profile-card p {
+            font-size: 14px;
+            color: #777;
+            margin: 5px 0;
+        }
+
+        .profile-card .strong {
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+    {% load static %}
+</head>
+<body>
+    <div class="profile-card">
+        <!-- Profile Picture -->
+
+        {% if pic %}
+            <img src="{{ pic.url }}" alt="Profile Picture">
+        {% else %}
+            <img src="{% static 'default.jpg' %}" alt="Default Profile Picture">
+        {% endif %}
+
+        <!-- User Details -->
+        <h2>{{ first_name }} {{ last_name }}</h2>
+        <p><span class="strong">Username:</span> {{ username }}</p>
+        <p><span class="strong">Email:</span> {{ email }}</p>
+        <p><span class="strong">Account:</span> {{ name }}</p>
+        <p><span class="strong">Account Type:</span> {{ type }}</p>
+        <p><span class="strong">Phone No:</span> {{ phone }}</p>
+        <p><span class="strong">dob:</span> {{ dob }}</p>
+        <p><span class="strong">created_at:</span> {{ created_at }}</p>
+        <p><span class="strong">updated_at:</span> {{ updated_at }}</p>
+<!--        <p><span class="strong">created_by:</span> {{ created_by }}</p>-->
+<!--        <p><span class="strong">updated_by:</span> {{ updated_by }}</p>-->
+
+       <a href="{% url 'account_edit' %}">Edit Profile</a>
+    </div>
+</body>
+</html>

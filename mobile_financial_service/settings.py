@@ -150,3 +150,6 @@ EMAIL_PORT=465
 EMAIL_USE_SSL=True
 EMAIL_HOST_USER="jerin.akter3033@gmail.com"  #recipent email
 EMAIL_HOST_PASSWORD="drwz qkzc ilzq rxpp"
+# media file for pic or any video uplode
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

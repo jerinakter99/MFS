@@ -187,3 +187,107 @@ def ResetPassword(request, reset_id):
         return redirect('forgot-password')
 
     return render(request,'signin/reset_password.html')
+
+
+# account create
+
+def account(request):
+    user=request.user
+    account, created = Accounts.objects.get_or_create(user=user)
+    # import pdb; pdb.set_trace()
+    context= {
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'username': user.username,
+        'email': user.email,
+        'name': account.name,
+        'pic': account.pic,
+        'phone': account.phone,
+        'dob': account.dob,
+        'gender': account.gender,
+        'city': account.city,
+        # 'street': account.street,
+        'state': account.state,
+        'postal_code': account.postal_code,
+        'country': account.country,
+        'created_at': account.created_at,
+        'updated_at': account.updated_at,
+        # 'created_by': account.created_by,
+        # 'updated_by': account.updated_by
+
+    }
+    return render(request,'accounts/account.html',context)
+
+@login_required
+def edit_account(request):
+    user = request.user
+    account = user.useraccount
+
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        name = request.POST.get('name')
+        pic = request.POST.get('pic')
+        phone = request.POST.get('phone')
+        dob = request.POST.get('dob')
+        gender = request.POST.get('gender')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        postal_code = request.POST.get('postal_code')
+        created_at =request.POST.get('created_at')
+        created_by = request.POST.get('created_by')
+        updated_at =request.POST.get('updated_at')
+        updated_by = request.POST.get('updated_by')
+
+
+
+        # Handle file upload
+        if 'pic' in request.FILES:
+           account.pic = request.FILES['pic']
+        # import pdb ; pdb.set_trace()
+        # Update user and profile details
+        user.first_name = first_name
+        user.last_name = last_name
+        user.username = username
+        user.email = email
+        user.save()
+
+        account.name = name
+        # account.pic = pic
+        account.phone = phone
+        account.dob = dob
+        account.gender = gender
+        account.city = city
+        account.state = state
+        account.postal_code = postal_code
+
+        # account.created_by = created_by
+        # account.updated_by = updated_by
+        account.save()
+
+        messages.success(request, 'Your profile has been updated successfully.')
+        return redirect('account')
+
+    context = {
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'username': user.username,
+        'email': user.email,
+        'name': account.name,
+        'pic': account.pic,
+        'phone': account.phone,
+        'dob': account.dob,
+        'gender': account.gender,
+        'city': account.city,
+        # 'street': account.street,
+        'state': account.state,
+        'postal_code': account.postal_code,
+        'country': account.country,
+
+
+
+    }
+
+    return render(request, 'accounts/edit.html', context)
