@@ -201,6 +201,7 @@ def account(request):
         'username': user.username,
         'email': user.email,
         'name': account.name,
+        'type': account.type,
         'pic': account.pic,
         'phone': account.phone,
         'dob': account.dob,
@@ -223,12 +224,14 @@ def edit_account(request):
     user = request.user
     account = user.useraccount
 
+# retrieves or obtains the value
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         username = request.POST.get('username')
         email = request.POST.get('email')
         name = request.POST.get('name')
+        type = request.POST.get('type')
         pic = request.POST.get('pic')
         phone = request.POST.get('phone')
         dob = request.POST.get('dob')
@@ -242,7 +245,7 @@ def edit_account(request):
         updated_by = request.POST.get('updated_by')
 
 
-
+ #  handles the updating of user and account profile information
         # Handle file upload
         if 'pic' in request.FILES:
            account.pic = request.FILES['pic']
@@ -255,6 +258,7 @@ def edit_account(request):
         user.save()
 
         account.name = name
+        account.type = type
         # account.pic = pic
         account.phone = phone
         account.dob = dob
@@ -269,13 +273,14 @@ def edit_account(request):
 
         messages.success(request, 'Your profile has been updated successfully.')
         return redirect('account')
-
+# creates a dictionary named context that holds the data to be passed to the template for rendering the html page.
     context = {
         'first_name': user.first_name,
         'last_name': user.last_name,
         'username': user.username,
         'email': user.email,
         'name': account.name,
+        'type': account.type,
         'pic': account.pic,
         'phone': account.phone,
         'dob': account.dob,
@@ -285,8 +290,6 @@ def edit_account(request):
         'state': account.state,
         'postal_code': account.postal_code,
         'country': account.country,
-
-
 
     }
 

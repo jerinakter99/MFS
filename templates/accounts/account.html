@@ -4,76 +4,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile Card</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-            margin: 0;
-        }
-
         .profile-card {
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 300px;
+        }
+        .profile-card .card-block-center {
             padding: 20px;
-            text-align: center;
         }
-
-        .profile-card img {
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            margin-bottom: 20px;
+        .profile-card i {
+            font-size: 5rem;
         }
+        .profile-card .edit-icon {
+            font-size: 2.30rem; /* Adjust size here */
+            cursor: pointer;
 
         .profile-card h2 {
             font-size: 24px;
             margin: 10px 0;
         }
-
-        .profile-card p {
+        .profile-card p, .profile-card h6 {
             font-size: 14px;
-            color: #777;
-            margin: 5px 0;
         }
-
-        .profile-card .strong {
-            color: #333;
+        .profile-card .font-weight-bold {
             font-weight: bold;
         }
+        .profile-card hr.bg-primary {
+            border-top: 2px solid #007bff;
+        }
     </style>
-    {% load static %}
 </head>
-<body>
-    <div class="profile-card">
-        <!-- Profile Picture -->
+<body class="bg-light">
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10 mt-5 pt-5">
+            <div class="row profile-card z-depth-3">
+                <!-- Left Side with Profile Picture and Basic Info -->
+                <div class="col-sm-4 bg-info rounded-left text-center text-white">
+                    <div class="card-block-center">
+                        <!-- Profile Picture -->
+                        {% if pic %}
+                            <img src="{{ pic.url }}" alt="Profile Picture" class="rounded-circle mb-4" style="width: 150px; height: 150px; object-fit: cover;">
+                        {% else %}
+                            <i class="fas fa-user-tie fa-7x mt-5"></i>
+                        {% endif %}
+                        <!-- Name and Account Info -->
+                        <h2 class="font-weight-bold mt-3">{{ first_name }} {{ last_name }}</h2>
+                        <p><span class="font-weight-bold">Account:</span> {{ name }}</p>
+                        <p><span class="font-weight-bold">Type:</span> {{ type }}</p>
 
-        {% if pic %}
-            <img src="{{ pic.url }}" alt="Profile Picture">
-        {% else %}
-            <img src="{% static 'default.jpg' %}" alt="Default Profile Picture">
-        {% endif %}
-
-        <!-- User Details -->
-        <h2>{{ first_name }} {{ last_name }}</h2>
-        <p><span class="strong">Username:</span> {{ username }}</p>
-        <p><span class="strong">Email:</span> {{ email }}</p>
-        <p><span class="strong">Account:</span> {{ name }}</p>
-        <p><span class="strong">Account Type:</span> {{ type }}</p>
-        <p><span class="strong">Phone No:</span> {{ phone }}</p>
-        <p><span class="strong">dob:</span> {{ dob }}</p>
-        <p><span class="strong">created_at:</span> {{ created_at }}</p>
-        <p><span class="strong">updated_at:</span> {{ updated_at }}</p>
-<!--        <p><span class="strong">created_by:</span> {{ created_by }}</p>-->
-<!--        <p><span class="strong">updated_by:</span> {{ updated_by }}</p>-->
-
-       <a href="{% url 'account_edit' %}">Edit Profile</a>
+                        <!-- Edit Icon -->
+                        <a href="{% url 'account_edit' %}" class="text-white">
+                            <i class="far fa-edit edit-icon mb-2"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Right Side with Information and Address -->
+                <div class="col-sm-8 bg-white rounded-right">
+                    <h4 class="mt-3">Personal Information</h4>
+                    <hr class="bg-primary">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p class="font-weight-bold">Email:</p>
+                            <h6 class="text-muted">{{ email }}</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="font-weight-bold">Phone:</p>
+                            <h6 class="text-muted">{{ phone }}</h6>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-sm-6">
+                            <p class="font-weight-bold">Date of Birth:</p>
+                            <h6 class="text-muted">{{ dob }}</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="font-weight-bold">Gender:</p>
+                            <h6 class="text-muted">{{ gender }}</h6>
+                        </div>
+                    </div>
+                    <h4 class="mt-3">Address</h4>
+                    <hr class="bg-primary">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p class="font-weight-bold">City:</p>
+                            <h6 class="text-muted">{{ city }}</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="font-weight-bold">State:</p>
+                            <h6 class="text-muted">{{ state }}</h6>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-sm-12">
+                            <p class="font-weight-bold">Postal Code:</p>
+                            <h6 class="text-muted">{{ postal_code }}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 </body>
 </html>

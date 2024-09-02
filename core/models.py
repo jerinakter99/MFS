@@ -3,8 +3,7 @@ from django.contrib.auth.models import User
 import uuid
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-import string ,random
-
+import string, random
 
 
 class PasswordReset(models.Model):
@@ -17,13 +16,13 @@ class PasswordReset(models.Model):
 
 
 class Accounts(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='useraccount')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='useraccount')
     name = models.CharField(max_length=10, unique=True, editable=False)
     pic = models.ImageField(upload_to='profile_pictures/', default='default.png')
     type = models.CharField(max_length=100, null=True, blank=True)
     phone = models.CharField(max_length=11, null=False, blank=False)
     dob = models.DateField(max_length=50, null=True, blank=True)
-    gender=models.CharField(max_length=50, null=True, blank=True)
+    gender = models.CharField(max_length=50, null=True, blank=True)
     city = models.CharField(max_length=200, null=True, blank=True)
     state = models.CharField(max_length=50, null=True, blank=True)
     # street = models.CharField(max_length=50, null=True, blank=True)
@@ -31,6 +30,7 @@ class Accounts(models.Model):
     country = models.CharField(max_length=50, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
     # created_by = models.ForeignKey(User,on_delete= models.SET_NULL,null=True,related_name='created_accounts')
     # updated_by = models.ForeignKey(User,on_delete= models.SET_NULL,null=True, related_name='created_accounts')
     # created_by = models.ForeignKey(
@@ -41,12 +41,13 @@ class Accounts(models.Model):
     #     User, on_delete=models.SET_NULL, null=True,
     #     related_name='updated_accounts', related_query_name='updated_account'
     # )
+
     def __str__(self):
         return self.user.username
 
-    def save( self,*args, **kwargs):
+    def save(self, *args, **kwargs):
         if not self.name:
-            self.name= self.generate_account()
+            self.name = self.generate_account()
 
         super().save(*args, **kwargs)
 
@@ -69,8 +70,7 @@ class Accounts(models.Model):
         return new_name
 
 
-@receiver(post_save,sender=User)
-
+@receiver(post_save, sender=User)
 def create_or_update_account(sender, instance, created, **kwargs):
     if created:
         Accounts.objects.create(user=instance)
@@ -79,8 +79,4 @@ def create_or_update_account(sender, instance, created, **kwargs):
 
 
 class Transactions(models.Model):
-    transaction_type=models.CharField(max_length=100,null=False)
-
-
-
-
+    transaction_type = models.CharField(max_length=100, null=False)

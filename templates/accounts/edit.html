@@ -4,62 +4,272 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
+    {% load static %}
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(120deg, #2980b9, #8e44ad);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            position: relative;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            width: 48%;
+            display: flex;
+            align-items: center;
+        }
+
+        label {
+            width: 35%;
+            font-weight: bold;
+            color: #555;
+            margin-right: 10px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="file"],
+        select {
+            width: 65%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+            background-color: #fff;
+            color: #333;
+            appearance: none;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="date"]:focus,
+        select:focus {
+            border-color: #8e44ad;
+            outline: none;
+        }
+
+        img {
+            display: block;
+            margin: 10px auto;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border: 2px solid #8e44ad;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(120deg, #2980b9, #8e44ad);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: linear-gradient(120deg,#2980b9, #8e44ad);
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            background: linear-gradient(120deg,#2980b9, #8e44ad);
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+            }
+
+            .input-group {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            label {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+
+            input,
+            select {
+                width: 100%;
+            }
+
+            .back-link {
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Edit Profile</h1>
-
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label for="first_name">First Name:</label>
-        <input type="text" id="first_name" name="first_name" value="{{ first_name }}" required><br><br>
-
-        <label for="last_name">Last Name:</label>
-        <input type="text" id="last_name" name="last_name" value="{{ last_name }}" required><br><br>
-
-        <label for="username">Username:</label>
-
-        <input type="text" id="username" name="username" value="{{ username }}" required><br><br>
-
-
-<!--        <label for="username">Username:</label>-->
-<!--        <input type="text"  id="username" name="username" value="{{ username }}"  required><br><br>-->
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="{{ email }}" required><br><br>
-
-        <label for="name">Account:</label>
-        <input type="text" readonly id="name" name="name" value="{{ name }}"><br><br>
-
-        <label for="phone">Phone:</label>
-        <input type="text"  id="phone" name="phone" value="{{ phone }}"><br><br>
-
-        <label for="dob">Date-of-Birth:</label>
-       <input type="date" id="dob" name="dob" value="{{ dob|date:'Y-m-d' }}"><br><br>
-
-
-        <label for="gender">Gender:</label>
-        <input type="text" id="gender" name="gender" value="{{ gender }}"><br><br>
-
-
-
-
-        <label for="pic">Profile Picture:</label>
-<!--        <input type="file" id="pic" name="pic"><br><br>-->
-<!--        {% if pic %}-->
-<!--            <img src="{{ pic.url }}" alt="Profile Picture" width="100"><br><br>-->
-<!--        {% endif %}-->
-         <input type="file" id="pic" name="pic"><br><br>
-
-        {% if pic %}
-            <img src="{{ pic.url }}" alt="Profile Picture" width="100"><br><br>
+    <div class="container">
+        <a href="{% url 'account' %}" class="back-link">Back to Account</a>
+        {% if phone %}
+            <h1>Edit Account</h1>
+        {% else %}
+            <h1>Add Account</h1>
         {% endif %}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
 
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" id="first_name" name="first_name" value="{{ first_name }}" required>
+                </div>
 
+                <div class="input-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" id="last_name" name="last_name" value="{{ last_name }}" required>
+                </div>
+            </div>
 
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" value="{{ username }}" required>
+                </div>
 
-        <button type="submit">Save Changes</button>
-    </form>
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="{{ email }}" required>
+                </div>
+            </div>
 
-    <a href="{% url 'account' %}">Back to Profile</a>
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="name">Account:</label>
+                    <input type="text" readonly id="name" name="name" value="{{ name }}">
+                </div>
+
+                <div class="input-group">
+                    <label for="type">Type:</label>
+                    <select id="type" name="type" required>
+                        <option value="" disabled selected>Select Type</option>
+                        <option value="Savings" {% if type == "Savings" %}selected{% endif %}>Savings</option>
+                        <option value="Current" {% if type == "Current" %}selected{% endif %}>Current</option>
+                        <option value="Business" {% if type == "Business" %}selected{% endif %}>Business</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="phone">Phone:</label>
+                    <input type="text" id="phone" name="phone" value="{{ phone }}" required>
+                </div>
+                <div class="input-group">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" value="{{ dob|date:'Y-m-d' }}" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="Male" {% if gender == "Male" %}selected{% endif %}>Male</option>
+                        <option value="Female" {% if gender == "Female" %}selected{% endif %}>Female</option>
+                        <option value="Other" {% if gender == "Other" %}selected{% endif %}>Other</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="city">City:</label>
+                    <input type="text" id="city" name="city" value="{{ city }}" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="state">State:</label>
+                    <input type="text" id="state" name="state" value="{{ state }}" required>
+                </div>
+                <div class="input-group">
+                    <label for="postal_code">Postal Code:</label>
+                    <input type="text" id="postal_code" name="postal_code" value="{{ postal_code }}" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="pic">Profile Picture:</label>
+                    <input type="file" id="pic" name="pic" accept="image/*">
+                </div>
+                <div class="input-group">
+                    {% if pic %}
+                        <img src="{{ pic.url }}" alt="Profile Picture" id="profilePreview">
+                    {% else %}
+                        <img src="{% static 'default.jpg' %}" alt="Profile Picture" id="profilePreview">
+                    {% endif %}
+                </div>
+            </div>
+
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript to preview the profile picture when selected
+        document.getElementById('pic').addEventListener('change', function(event) {
+            const [file] = event.target.files;
+            if (file) {
+                const preview = document.getElementById('profilePreview');
+                preview.src = URL.createObjectURL(file);
+            }
+        });
+    </script>
 </body>
 </html>
